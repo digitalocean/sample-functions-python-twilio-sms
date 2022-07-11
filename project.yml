@@ -1,3 +1,6 @@
+environment:
+  TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+  TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
 packages:
   - name: sample
     actions:
