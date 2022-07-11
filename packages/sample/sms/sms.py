@@ -16,21 +16,21 @@ def valid_number(number, client):
 def main(args):
     sid = os.getenv('TWILIO_ACCOUNT_SID')
     token = os.getenv('TWILIO_AUTH_TOKEN')
-    number = args.get("number")
-    user_to = args.get("receiver number")
-    body = args.get("body", "this was sent from a twilio sms number")
+    number = args.get("from")
+    user_to = args.get("number")
+    message = args.get("message", "this was sent from a twilio sms number")
 
     if not number:
         return {"body" : "no number provided"}
     if not user_to:
         return {"body" : "no receiver phone number provided"}
-    if not body:
+    if not message:
         return {"body" : "no message provided"}
 
     client = Client(sid, token)
     if (valid_number(number, client) == True) & (valid_number(user_to, client) == True):
         client.messages.create(
-            body = body,
+            body = message,
             from_ = number,
             to = user_to
         )
