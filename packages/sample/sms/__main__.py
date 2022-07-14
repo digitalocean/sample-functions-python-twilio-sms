@@ -28,7 +28,7 @@ def main(args):
         return {"body" : "no message provided"}
 
     client = Client(sid, token)
-    if (valid_number(number, client) == True) & (valid_number(user_to, client) == True):
+    if valid_number(number, client) and valid_number(user_to, client):
         client.messages.create(
             body = message,
             from_ = number,
