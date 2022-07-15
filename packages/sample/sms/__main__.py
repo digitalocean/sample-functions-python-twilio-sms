@@ -55,6 +55,5 @@ def main(args):
             to = user_to
         )
         return {"body" : "message sent"}
-    else:
-        return {"body" : "phone numbers provided are not twilio verified numbers"}
+    return {"body" : "phone numbers provided are not twilio verified numbers"}
 
