@@ -1,0 +1,13 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+functions:
+- github:
+    branch: main
+    deploy_on_push: true
+    repo: digitalocean/sample-functions-python-sms
+  name: sms-api
+  routes:
+  - path: /
+  source_dir: /
+name: sms
