@@ -5,11 +5,11 @@ from twilio.base.exceptions import TwilioRestException
 
 def translateCode(code):
     '''
-    Takes in the sendgrid status code, 
+    Takes in the twilio status code, 
     returns a http status code.
 
         Parameters:
-            args: Contains the sendgrid error status code
+            args: Contains the twilio error status code
 
         Returns:
             json statusCode: Json http error status code
