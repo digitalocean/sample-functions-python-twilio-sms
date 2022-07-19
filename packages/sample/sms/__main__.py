@@ -1,6 +1,76 @@
+from http import HTTPStatus
 import os
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
+
+def translateCode(code):
+    '''
+    Takes in the twilio status code, 
+    returns a http status code.
+
+        Parameters:
+            args: Contains the twilio error status code
+
+        Returns:
+            json statusCode: Json http error status code
+    '''
+    match code:
+        case "60000":
+            return HTTPStatus.BAD_REQUEST
+        case "60001":
+            return HTTPStatus.UNAUTHORIZED
+        case "60002":
+            return HTTPStatus.BAD_REQUEST
+        case "60003":
+            return HTTPStatus.TOO_MANY_REQUESTS
+        case "60004":
+            return HTTPStatus.BAD_REQUEST
+        case "60005":
+            return HTTPStatus.BAD_REQUEST
+        case "60021":
+            return HTTPStatus.FORBIDDEN
+        case "60022":
+            return HTTPStatus.UNAUTHORIZED
+        case "60023":
+            return HTTPStatus.NOT_FOUND
+        case "60032":
+            return HTTPStatus.BAD_REQUEST
+        case "60033":
+            return HTTPStatus.BAD_REQUEST
+        case "60042":
+            return HTTPStatus.BAD_REQUEST
+        case "60046":
+            return HTTPStatus.BAD_REQUEST
+        case "60060":
+            return HTTPStatus.SERVICE_UNAVAILABLE
+        case "60064":
+            return HTTPStatus.FORBIDDEN
+        case "60065":
+            return HTTPStatus.FORBIDDEN
+        case "60066":
+            return HTTPStatus.FORBIDDEN
+        case "60069":
+            return HTTPStatus.BAD_REQUEST
+        case "60070":
+            return HTTPStatus.BAD_REQUEST
+        case "60071":
+            return HTTPStatus.NOT_FOUND
+        case "60072":
+            return HTTPStatus.NOT_FOUND
+        case "60073":
+            return HTTPStatus.BAD_REQUEST
+        case "60074":
+            return HTTPStatus.BAD_REQUEST
+        case "60075":
+            return HTTPStatus.BAD_REQUEST
+        case "60078":
+            return HTTPStatus.FORBIDDEN
+        case "60082":
+            return HTTPStatus.FORBIDDEN
+        case "60083":
+            return HTTPStatus.FORBIDDEN
+        case _ :
+            return HTTPStatus.INTERNAL_SERVER_ERROR
 
 def valid_number(number, client):
     '''
@@ -41,11 +111,20 @@ def main(args):
     message = args.get("message", "this was sent from a twilio sms number")
 
     if not number:
-        return {"body" : "no number provided"}
+        return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no number provided"
+    }
     if not user_to:
-        return {"body" : "no receiver phone number provided"}
+        return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no receiver phone number provided"
+    }
     if not message:
-        return {"body" : "no message provided"}
+        return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no message provided"
+    }
 
     client = Client(sid, token)
     if valid_number(number, client) and valid_number(user_to, client):
@@ -55,6 +134,16 @@ def main(args):
             to = user_to
         )
         if msg.error_code == "null":
-            return {"body" : "success"}
-    return {"body" : "no twilio verified phone numbers provided"}
-
+            return {
+                "statusCode" : HTTPStatus.ACCEPTED,
+                "body" : "success"
+            }    
+        code = translateCode(msg.error_code)
+        return {
+            "statusCode" : code,
+            "body" : msg.error_code
+        }         
+    return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no twilio verified phone numbers provided"
+    }
