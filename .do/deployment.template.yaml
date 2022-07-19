@@ -5,7 +5,7 @@ functions:
 - github:
     branch: main
     deploy_on_push: true
-    repo: digitalocean/sample-functions-python-sms
+    repo: digitalocean/sample-functions-python-twilio-sms
   name: sms-api
   routes:
   - path: /
