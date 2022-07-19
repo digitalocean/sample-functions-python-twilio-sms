@@ -68,10 +68,8 @@ def main(args):
             return {
                 "statusCode" : HTTPStatus.ACCEPTED,
                 "body" : "success"
-            }
-            
+            }     
     return {
         "statusCode" : HTTPStatus.BAD_REQUEST,
-        "body" : "no twilio verified phone numbers provided"
+        "body" : msg.error_message
     }
-
