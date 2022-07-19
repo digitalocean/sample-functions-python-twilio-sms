@@ -49,11 +49,12 @@ def main(args):
 
     client = Client(sid, token)
     if valid_number(number, client) and valid_number(user_to, client):
-        client.messages.create(
+        msg = client.messages.create(
             body = message,
             from_ = number,
             to = user_to
         )
-        return {"body" : "message sent"}
-    return {"body" : "phone numbers provided are not twilio verified numbers"}
+        if msg.error_code == "null":
+            return {"body" : "success"}
+    return {"body" : "no twilio verified phone numbers provided"}
 
