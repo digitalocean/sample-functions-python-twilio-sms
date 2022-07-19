@@ -14,7 +14,7 @@ def translateCode(code):
         Returns:
             json statusCode: Json http error status code
     '''
-    match code:
+    match str(code):
         case "60000":
             return HTTPStatus.BAD_REQUEST
         case "60001":
