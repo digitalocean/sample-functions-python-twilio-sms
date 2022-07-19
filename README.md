@@ -19,13 +19,13 @@ Documentation is available at https://docs.digitalocean.com/products/functions.
 
 ```bash
 # clone this repo
-git clone git@github.com:digitalocean/sample-functions-python-sms.git
+git clone git@github.com:digitalocean/sample-functions-python-twilio-sms.git
 ```
 
 ```
 # deploy the project, using a remote build so that compiled executable matched runtime environment
-> doctl serverless deploy sample-functions-python-sms --remote-build
-Deploying 'sample-functions-python-sms'
+> doctl serverless deploy sample-functions-python-twilio-sms --remote-build
+Deploying 'sample-functions-python-twilio-sms'
   to namespace 'fn-...'
   on host 'https://faas-...'
 Submitted action 'sms' for remote building and deployment in runtime python:default (id: ...)

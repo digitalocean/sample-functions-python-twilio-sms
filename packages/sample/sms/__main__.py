@@ -1,3 +1,4 @@
+from http import HTTPStatus
 import os
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
@@ -41,11 +42,20 @@ def main(args):
     message = args.get("message", "this was sent from a twilio sms number")
 
     if not number:
-        return {"body" : "no number provided"}
+        return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no number provided"
+    }
     if not user_to:
-        return {"body" : "no receiver phone number provided"}
+        return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no receiver phone number provided"
+    }
     if not message:
-        return {"body" : "no message provided"}
+        return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no message provided"
+    }
 
     client = Client(sid, token)
     if valid_number(number, client) and valid_number(user_to, client):
@@ -55,6 +65,13 @@ def main(args):
             to = user_to
         )
         if msg.error_code == "null":
-            return {"body" : "success"}
-    return {"body" : "no twilio verified phone numbers provided"}
+            return {
+                "statusCode" : HTTPStatus.ACCEPTED,
+                "body" : "success"
+            }
+            
+    return {
+        "statusCode" : HTTPStatus.BAD_REQUEST,
+        "body" : "no twilio verified phone numbers provided"
+    }
 
