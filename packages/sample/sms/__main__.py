@@ -130,7 +130,7 @@ def main(args):
             from_ = number,
             to = user_to
         )
-        if msg.error_code == "null":
+        if msg.error_code == "null" or msg.error_code == 200:
             return {
                 "statusCode" : HTTPStatus.ACCEPTED,
                 "body" : "success"
@@ -138,7 +138,7 @@ def main(args):
         code = translateCode(msg.error_code)
         return {
             "statusCode" : code,
-            "body" : msg.error_code
+            "body" : msg.error_message
         }         
     return {
         "statusCode" : HTTPStatus.BAD_REQUEST,
