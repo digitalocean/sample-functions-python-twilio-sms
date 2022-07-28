@@ -14,63 +14,60 @@ def translateCode(code):
         Returns:
             json statusCode: Json http error status code
     '''
-    match str(code):
-        case "60000":
-            return HTTPStatus.BAD_REQUEST
-        case "60001":
-            return HTTPStatus.UNAUTHORIZED
-        case "60002":
-            return HTTPStatus.BAD_REQUEST
-        case "60003":
-            return HTTPStatus.TOO_MANY_REQUESTS
-        case "60004":
-            return HTTPStatus.BAD_REQUEST
-        case "60005":
-            return HTTPStatus.BAD_REQUEST
-        case "60021":
-            return HTTPStatus.FORBIDDEN
-        case "60022":
-            return HTTPStatus.UNAUTHORIZED
-        case "60023":
-            return HTTPStatus.NOT_FOUND
-        case "60032":
-            return HTTPStatus.BAD_REQUEST
-        case "60033":
-            return HTTPStatus.BAD_REQUEST
-        case "60042":
-            return HTTPStatus.BAD_REQUEST
-        case "60046":
-            return HTTPStatus.BAD_REQUEST
-        case "60060":
-            return HTTPStatus.SERVICE_UNAVAILABLE
-        case "60064":
-            return HTTPStatus.FORBIDDEN
-        case "60065":
-            return HTTPStatus.FORBIDDEN
-        case "60066":
-            return HTTPStatus.FORBIDDEN
-        case "60069":
-            return HTTPStatus.BAD_REQUEST
-        case "60070":
-            return HTTPStatus.BAD_REQUEST
-        case "60071":
-            return HTTPStatus.NOT_FOUND
-        case "60072":
-            return HTTPStatus.NOT_FOUND
-        case "60073":
-            return HTTPStatus.BAD_REQUEST
-        case "60074":
-            return HTTPStatus.BAD_REQUEST
-        case "60075":
-            return HTTPStatus.BAD_REQUEST
-        case "60078":
-            return HTTPStatus.FORBIDDEN
-        case "60082":
-            return HTTPStatus.FORBIDDEN
-        case "60083":
-            return HTTPStatus.FORBIDDEN
-        case _ :
-            return HTTPStatus.INTERNAL_SERVER_ERROR
+    if str(code) == "60000":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60001":
+        return HTTPStatus.UNAUTHORIZED
+    elif str(code) == "60002":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60003":
+        return HTTPStatus.TOO_MANY_REQUESTS
+    elif str(code) == "60004":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60005":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60021":
+        return HTTPStatus.FORBIDDEN
+    elif str(code) == "60022":
+        return HTTPStatus.UNAUTHORIZED
+    elif str(code) == "60023":
+        return HTTPStatus.NOT_FOUND
+    elif str(code) == "60033":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60042":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60046":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60060":
+        return HTTPStatus.SERVICE_UNAVAILABLE
+    elif str(code) == "60064":
+        return HTTPStatus.FORBIDDEN
+    elif str(code) == "60065":
+        return HTTPStatus.FORBIDDEN
+    elif str(code) == "60066":
+        return HTTPStatus.FORBIDDEN
+    elif str(code) == "60069":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60070":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60071":
+        return HTTPStatus.NOT_FOUND
+    elif str(code) == "60072":
+        return HTTPStatus.NOT_FOUND
+    elif str(code) == "60073":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60074":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60075":
+        return HTTPStatus.BAD_REQUEST
+    elif str(code) == "60078":
+        return HTTPStatus.FORBIDDEN
+    elif str(code) == "60082":
+        return HTTPStatus.FORBIDDEN
+    elif str(code) == "60083":
+        return HTTPStatus.FORBIDDEN
+    else:
+        return HTTPStatus.INTERNAL_SERVER_ERROR
 
 def valid_number(number, client):
     '''
