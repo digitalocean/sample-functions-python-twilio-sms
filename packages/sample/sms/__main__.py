@@ -105,7 +105,7 @@ def main(args):
     token = os.getenv('TWILIO_AUTH_TOKEN')
     number = args.get("from")
     user_to = args.get("number")
-    message = args.get("message", "this was sent from a twilio sms number")
+    message = args.get("message")
 
     if not number:
         return {
