@@ -5,5 +5,4 @@ packages:
   - name: sample
     actions:
       - name: sms
-        package: sample
         runtime: 'python:default'
