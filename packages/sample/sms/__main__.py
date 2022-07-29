@@ -84,10 +84,7 @@ def valid_number(number, client):
         client.lookups.phone_numbers(number).fetch(type = "carrier")
         return True
     except TwilioRestException as e:
-        if e == 21606:
             return False
-        else:
-            raise e
 
 
 def main(args):
@@ -130,7 +127,7 @@ def main(args):
             from_ = number,
             to = user_to
         )
-        if msg.error_code == "null" or msg.error_code == "":
+        if msg.status != "undelivered" or msg.status != "failed":
             return {
                 "statusCode" : HTTPStatus.ACCEPTED,
                 "body" : "success"
